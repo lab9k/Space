@@ -174,11 +174,27 @@ window.requestAnimationFrame = (function(){
         bufferCtx.restore();
 
         // Draw particles
-
         len = particles.length;
-        for (i = 0, len = particles.length; i < len; i++) {
-            particles[i].render(bufferCtx);
+        bufferCtx.save();
+        bufferCtx.fillStyle = bufferCtx.strokeStyle = PARTICLE_COLOUR;
+        bufferCtx.lineCap = bufferCtx.lineJoin = 'round';
+        bufferCtx.lineWidth = PARTICLE_RADIUS * 2;
+        bufferCtx.beginPath();
+        for (i = 0; i < len; i++) {
+            p = particles[i];
+            p.update();
+            bufferCtx.moveTo(p.x, p.y);
+            bufferCtx.lineTo(p._latest.x, p._latest.y);
         }
+        bufferCtx.stroke();
+        bufferCtx.beginPath();
+        for (i = 0; i < len; i++) {
+            p = particles[i];
+            bufferCtx.moveTo(p.x, p.y);
+            bufferCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2, false);
+        }
+        bufferCtx.fill();
+        bufferCtx.restore();
 
         context.drawImage(bufferCvs, 0, 0);
 
