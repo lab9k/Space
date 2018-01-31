@@ -2,33 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'/>
     <title>Space</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <style>
         .svg {
             max-width: 60%;
             padding: 1%;
-            margin-left:auto; margin-right:auto; display:block;
+            margin-left: auto;
+            margin-right: auto;
             margin-top: 2.5%;
+			position: relative;
         }
+
         body {
             background-color: rgb(11, 51, 56);
         }
+
         p {
             font-size: 225%;
             font-family: 'Roboto', sans-serif;
             color: white;
         }
+
         .footer {
             margin-left: 5%;
             position: fixed;
             bottom: 0;
             text-align: center;
         }
+		canvas {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.noselect {
+			-webkit-touch-callout: none; /* iOS Safari */
+			-webkit-user-select: none; /* Safari */
+			-moz-user-select: none; /* Firefox */
+			-ms-user-select: none; /* Internet Explorer/Edge */
+			user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+		}
     </style>
 </head>
-<body>
+<canvas id="c"></canvas>
+<a href="https://lab9k.github.io">
 <div class="svg">
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 737.9 133.1" style="enable-background:new 0 0 737.9 133.1;" xml:space="preserve">
@@ -36,6 +55,7 @@
 	.st0 {
         fill: #ffffff;
     }
+
     .st1 {
         fill: #ffffff;
     }
@@ -81,9 +101,9 @@
 <rect x="316.5" y="104.8" class="st0" width="45" height="21.3"/>
 </svg>
 </div>
-
+</a>
 <div class="footer">
-    <p>Touch to add gravity points</p>
+    <p class="noselect">Touch to add gravity points</p>
 </div>
 
 
@@ -92,6 +112,6 @@
 <script language="javascript" type="text/javascript" src="js/Vector.js"></script>
 <script language="javascript" type="text/javascript" src="js/GravityPoint.js"></script>
 <script language="javascript" type="text/javascript" src="js/Particle.js"></script>
-<script language="javascript" type="text/javascript" src="js/sketch.js"></script>
+<script language="javascript" type="text/javascript" src="js/index.js"></script>
 </body>
 </html>
