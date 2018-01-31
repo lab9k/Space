@@ -24,8 +24,7 @@ window.requestAnimationFrame = (function(){
         PARTICLE_COLOUR       = '#fff',
         PARTICLE_NUM          = 1000,
         PARTICLE_RADIUS       = 1,
-        G_POINT_RADIUS        = 10,
-        G_POINT_RADIUS_LIMITS = 65; // TODO not used, already defined in prototype
+        G_POINT_RADIUS        = 10;
 
     // Vars
 
@@ -72,18 +71,21 @@ window.requestAnimationFrame = (function(){
     }
 
     function mouseDown(e) {
-        socket.emit('click', e);
+        socket.emit('click', {clientX : e.clientX, clientY : e.clientY});
+    }
+
+    socket.on('serverClick', function (data) {
         for (var i = gravities.length - 1; i >= 0; i--) {
             if (gravities[i].isMouseOver) {
                 gravities[i].startDrag(mouse);
                 return;
             }
         }
-        gravities.push(new GravityPoint(e.clientX, e.clientY, G_POINT_RADIUS, {
+        gravities.push(new GravityPoint(data.clientX, data.clientY, G_POINT_RADIUS, {
             particles: particles,
             gravities: gravities
         }));
-    }
+    });
 
     function mouseUp(e) {
         for (var i = 0, len = gravities.length; i < len; i++) {
@@ -141,10 +143,6 @@ window.requestAnimationFrame = (function(){
     canvas.addEventListener('mouseup', mouseUp, false);
     canvas.addEventListener('dblclick', doubleClick, false);
 
-    socket.on('serverClick', function (data) {
-        mouseDown(data);
-    });
-
     // Start Update
 
     var loop = function() {
@@ -157,6 +155,7 @@ window.requestAnimationFrame = (function(){
         context.fillRect(0, 0, screenWidth, screenHeight);
         context.restore();
 
+        // Draw gravity points
         for (i = 0, len = gravities.length; i < len; i++) {
             g = gravities[i];
             if (g.dragging) g.drag(mouse);
@@ -173,6 +172,8 @@ window.requestAnimationFrame = (function(){
         bufferCtx.globalAlpha = 0.35;
         bufferCtx.fillRect(0, 0, screenWidth, screenHeight);
         bufferCtx.restore();
+
+        // Draw particles
 
         // for (i = 0, len = particles.length; i < len; i++) {
         //     particles[i].render(bufferCtx);
@@ -206,5 +207,3 @@ window.requestAnimationFrame = (function(){
     loop();
 
 })();
-
-
