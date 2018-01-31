@@ -71,8 +71,8 @@ window.requestAnimationFrame = (function(){
     }
 
     function mouseDown(e) {
-        socket.emit('click', {clientX : e.screenX/window.screen.availWidth
-                             ,clientY : e.screenY/window.screen.availHeight});
+        socket.emit('click', {clientX : e.clientX/window.screen.availWidth
+                             ,clientY : e.clientY/window.screen.availHeight});
     }
 
     socket.on('serverClick', function (data) {

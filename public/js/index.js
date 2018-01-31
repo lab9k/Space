@@ -57,8 +57,8 @@ let socket = io.connect();
     }
 
     function mouseDown(e) {
-        socket.emit('click', {clientX : e.screenX/window.screen.availWidth
-            ,clientY : e.screenY/window.screen.availHeight});
+        socket.emit('click', {clientX : e.clientX/window.screen.availWidth
+            ,clientY : e.clientY/window.screen.availHeight});
         points.push({x : e.clientX, y : e.clientY});
     }
 
