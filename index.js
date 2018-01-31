@@ -11,7 +11,7 @@ let app = express();
 let server = http.Server(app);
 let io = socketio(server);
 
-app.use(express.static('server'));
+app.use(express.static('public'));
 
 io.on('connection', function (socket) {
     console.log('User connected');
