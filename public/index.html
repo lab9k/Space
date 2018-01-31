@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>MinesweeperOnline</title>
+    <title>Space</title>
 
     <style>
         body {
@@ -41,7 +41,12 @@
 <body onmousedown="bodyMouseDown(event)" onmouseup="bodyMouseUp(event)">
     <canvas id="c"></canvas>
     <div class="info">Click to add gravity point.</div>
+
     <script src="/socket.io/socket.io.js"></script>
+
+    <script language="javascript" type="text/javascript" src="js/Vector.js"></script>
+    <script language="javascript" type="text/javascript" src="js/GravityPoint.js"></script>
+    <script language="javascript" type="text/javascript" src="js/Particle.js"></script>
     <script language="javascript" type="text/javascript" src="js/sketch.js"></script>
 </body>
 </html>
