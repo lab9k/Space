@@ -13,13 +13,19 @@ let io = socketio(server);
 
 app.use(express.static('public'));
 
+let beamers = [];
+
 io.on('connection', function (socket) {
     console.log('User connected');
-    socket.on('disconnect', function(){
-        console.log('User disconnected');
-    });
+
+    if (socket.handshake.headers.referer.indexOf("beamer") !== -1) {
+        beamers.push(socket);
+    }
+
     socket.on('click', function (data) {
-        io.sockets.emit('serverClick', data);
+        for (let i = 0; i < beamers.length; i++) {
+            beamers[i].emit('serverClick', data)
+        }
     });
 });
 
