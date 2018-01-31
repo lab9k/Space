@@ -71,7 +71,8 @@ window.requestAnimationFrame = (function(){
     }
 
     function mouseDown(e) {
-        socket.emit('click', {clientX : e.clientX, clientY : e.clientY});
+        socket.emit('click', {clientX : e.screenX/window.screen.availWidth
+                             ,clientY : e.screenY/window.screen.availHeight});
     }
 
     socket.on('serverClick', function (data) {
@@ -81,7 +82,9 @@ window.requestAnimationFrame = (function(){
                 return;
             }
         }
-        gravities.push(new GravityPoint(data.clientX, data.clientY, G_POINT_RADIUS, {
+        gravities.push(new GravityPoint(data.clientX*window.screen.availWidth
+            , data.clientY*window.screen.availHeight
+            , G_POINT_RADIUS, {
             particles: particles,
             gravities: gravities
         }));
