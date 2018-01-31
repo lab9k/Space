@@ -1,3 +1,9 @@
+/************************************************
+ *            Rainbow pattern methods           *
+ *                                              *
+ *                    Lab9K                     *
+ ************************************************/
+
 const frequency = .001; // slow change
 const range = 10000000; // loop iterate a lot
 /**
