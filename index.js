@@ -33,7 +33,11 @@ io.on('connection', function (socket) {
         }
     });
 
-    socket.on('disconnect', function (data) {
+    socket.on('disconnect', function () {
+        let index = beamers.indexOf(socket);
+        if (index !== -1) {
+            beamers.splice(index);
+        }
         console.log('User disconnected');
         counter--;
         logUsers();
